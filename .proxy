@@ -1,0 +1,25 @@
+# usage: source $0
+# unsets proxy if it's already set
+
+echo "userid:" && read uid
+proxy=192.168.90.226:8080
+
+if [[ -z $HTTP_PROXY ]]; then
+  echo "password:" && read passwd
+  HTTP_PROXY="http://${uid}:${passwd}@${proxy}"
+  HTTPS_PROXY="https://${uid}:${passwd}@${proxy}"
+  NO_PROXY=localhost,.dt.inc,69.74.57.10,10.134.8.11,10.134.8.12,10.134.8.13,10.134.8.14,10.134.8.68,10.134.8.70,10.135.0.14,10.135.0.15,10.135.0.17,10.135.0.18,10.135.0.24,10.135.0.27,10.135.0.28,192.168.15.130,192.168.15.230,192.169.15.106,192.168.9.92,.dt2.local,.dealertrack.com,.ahfctoolkit.com,192.168.70.210,10.136.0.11
+  echo "set proxy $proxy"
+else
+  HTTP_PROXY=
+  HTTPS_PROXY=
+  NO_PROXY=
+  echo "unset proxy"
+fi
+export HTTP_PROXY
+export NO_PROXY
+export HTTPS_PROXY
+
+export http_proxy=$HTTP_PROXY
+export https_proxy=$HTTPS_PROXY
+export no_proxy=$NO_PROXY
